@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code - Portfolio Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2a2a2a;
+            --code-bg: #1e1e1e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --border-color: #333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--secondary-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        .project-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .tab-button {
+            padding: 1rem 1.5rem;
+            background: transparent;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .tab-button.active {
+            color: var(--accent-color);
+            border-bottom-color: var(--accent-color);
+        }
+
+        .tab-button:hover {
+            color: var(--text-primary);
+        }
+
+        .project-content {
+            display: none;
+        }
+
+        .project-content.active {
+            display: block;
+        }
+
+        .project-info {
+            background: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .project-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .file-explorer {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .file-explorer-header {
+            background: var(--code-bg);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .file-explorer-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .file-tree {
+            padding: 1rem;
+        }
+
+        .file-item {
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .file-item:hover {
+            background: var(--code-bg);
+        }
+
+        .file-item.active {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .file-icon {
+            width: 16px;
+            text-align: center;
+        }
+
+        .code-viewer {
+            background: var(--code-bg);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .code-header {
+            background: var(--secondary-bg);
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .code-filename {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .copy-button {
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: var(--transition);
+        }
+
+        .copy-button:hover {
+            background: var(--accent-hover);
+        }
+
+        .code-content {
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        pre {
+            margin: 0;
+            padding: 1.5rem;
+            background: var(--code-bg);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        code {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--secondary-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .project-tabs {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .tab-button {
+                border-bottom: 1px solid var(--border-color);
+                border-right: none;
+            }
+
+            .project-links {
+                flex-direction: column;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-title">📂 Source Code</h1>
+            <div class="header-nav">
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    Về Portfolio
+                </a>
+                <a href="https://github.com/leanhtu05" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i>
+                    GitHub Profile
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Project Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Demo Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2000+</div>
+                <div class="stat-label">Lines of Code</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Technologies</div>
+            </div>
+        </div>
+
+        <!-- Project Tabs -->
+        <div class="project-tabs">
+            <button class="tab-button active" data-project="portfolio">
+                <i class="fas fa-home"></i>
+                Portfolio Main
+            </button>
+            <button class="tab-button" data-project="health-ai">
+                <i class="fas fa-chart-bar"></i>
+                Health AI Admin
+            </button>
+            <button class="tab-button" data-project="tech-startup">
+                <i class="fas fa-rocket"></i>
+                Tech Startup
+            </button>
+            <button class="tab-button" data-project="ecommerce">
+                <i class="fas fa-shopping-cart"></i>
+                E-commerce
+            </button>
+            <button class="tab-button" data-project="saas">
+                <i class="fas fa-cloud"></i>
+                SaaS Platform
+            </button>
+        </div>
+
+        <!-- Portfolio Main Project -->
+        <div class="project-content active" id="portfolio">
+            <div class="project-info">
+                <h2 class="project-title">Portfolio Website</h2>
+                <p class="project-description">
+                    Website portfolio cá nhân với thiết kế modern, dark theme và các demo projects tương tác. 
+                    Được xây dựng từ đầu với HTML5, CSS3 và JavaScript vanilla.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Responsive</span>
+                    <span class="tech-tag">Dark Theme</span>
+                </div>
+                <div class="project-links">
+                    <a href="index.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Live Demo
+                    </a>
+                    <a href="https://github.com/leanhtu05/portfolio" target="_blank" class="btn btn-secondary">
+                        <i class="fab fa-github"></i>
+                        GitHub Repo
+                    </a>
+                </div>
+            </div>
+
+            <div class="file-explorer">
+                <div class="file-explorer-header">
+                    <div class="file-explorer-title">📁 Project Structure</div>
+                </div>
+                <div class="file-tree">
+                    <div class="file-item active" data-file="index-html">
+                        <i class="fab fa-html5 file-icon" style="color: #e34c26;"></i>
+                        <span>index.html</span>
+                    </div>
+                    <div class="file-item" data-file="styles-css">
+                        <i class="fab fa-css3-alt file-icon" style="color: #1572b6;"></i>
+                        <span>styles.css</span>
+                    </div>
+                    <div class="file-item" data-file="script-js">
+                        <i class="fab fa-js-square file-icon" style="color: #f7df1e;"></i>
+                        <span>script.js</span>
+                    </div>
+                    <div class="file-item" data-file="readme-md">
+                        <i class="fab fa-markdown file-icon" style="color: #083fa1;"></i>
+                        <span>README.md</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="code-viewer">
+                <div class="code-header">
+                    <span class="code-filename" id="current-filename">index.html</span>
+                    <button class="copy-button" onclick="copyCode()">
+                        <i class="fas fa-copy"></i>
+                        Copy
+                    </button>
+                </div>
+                <div class="code-content">
+                    <pre><code class="language-html" id="code-display"><!-- Portfolio HTML Structure -->
+&lt;!DOCTYPE html&gt;
+&lt;html lang="vi"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Le Anh Tu - Front-end Developer Portfolio&lt;/title&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"&gt;
+    &lt;link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"&gt;
+    &lt;link rel="stylesheet" href="styles.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;!-- Navigation --&gt;
+    &lt;nav class="navbar"&gt;
+        &lt;div class="nav-container"&gt;
+            &lt;div class="nav-logo"&gt;
+                &lt;a href="#home"&gt;Le Anh Tu&lt;/a&gt;
+            &lt;/div&gt;
+            &lt;div class="nav-menu" id="nav-menu"&gt;
+                &lt;a href="#home" class="nav-link"&gt;Home&lt;/a&gt;
+                &lt;a href="#about" class="nav-link"&gt;About&lt;/a&gt;
+                &lt;a href="#skills" class="nav-link"&gt;Skills&lt;/a&gt;
+                &lt;a href="#projects" class="nav-link"&gt;Projects&lt;/a&gt;
+                &lt;a href="#contact" class="nav-link"&gt;Contact&lt;/a&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+
+    &lt;!-- Hero Section --&gt;
+    &lt;section id="home" class="hero"&gt;
+        &lt;div class="hero-container"&gt;
+            &lt;div class="hero-content"&gt;
+                &lt;h1 class="hero-title"&gt;Le Anh Tu&lt;/h1&gt;
+                &lt;h2 class="hero-subtitle"&gt;
+                    &lt;span id="typing-text"&gt;&lt;/span&gt;
+                    &lt;span class="cursor"&gt;|&lt;/span&gt;
+                &lt;/h2&gt;
+                &lt;p class="hero-description"&gt;
+                    Chào mừng đến với portfolio của tôi. Tôi là một lập trình viên 
+                    mới ra trường với đam mê xây dựng những giao diện web đẹp mắt.
+                &lt;/p&gt;
+                &lt;div class="hero-buttons"&gt;
+                    &lt;a href="#projects" class="btn btn-primary"&gt;Xem dự án&lt;/a&gt;
+                    &lt;a href="cv-viewer.html" class="btn btn-secondary"&gt;Xem CV&lt;/a&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/section&gt;
+
+    &lt;!-- More sections... --&gt;
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- Other project contents will be loaded dynamically -->
+        <div class="project-content" id="health-ai">
+            <div class="project-info">
+                <h2 class="project-title">Health AI - Admin Dashboard</h2>
+                <p class="project-description">
+                    Trang quản trị cho ứng dụng AI chẩn đoán sức khỏe với data visualization, 
+                    user management và real-time analytics.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Chart.js</span>
+                    <span class="tech-tag">Dark Theme</span>
+                </div>
+                <div class="project-links">
+                    <a href="demos/health-ai-admin.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+            <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">
+                📝 Source code cho Health AI Admin Dashboard có sẵn trong file 
+                <code style="background: var(--secondary-bg); padding: 0.25rem 0.5rem; border-radius: 4px;">demos/health-ai-admin.html</code>
+            </p>
+        </div>
+
+        <!-- Similar structure for other projects -->
+        <div class="project-content" id="tech-startup">
+            <div class="project-info">
+                <h2 class="project-title">TechFlow - Tech Startup Landing</h2>
+                <p class="project-description">
+                    Landing page hiện đại cho công ty công nghệ với thiết kế gradient, 
+                    animations và tối ưu chuyển đổi.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">Animations</span>
+                    <span class="tech-tag">Responsive</span>
+                </div>
+                <div class="project-links">
+                    <a href="demos/tech-startup.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+            <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">
+                📝 Source code có sẵn trong file 
+                <code style="background: var(--secondary-bg); padding: 0.25rem 0.5rem; border-radius: 4px;">demos/tech-startup.html</code>
+            </p>
+        </div>
+
+        <div class="project-content" id="ecommerce">
+            <div class="project-info">
+                <h2 class="project-title">StyleHub - E-commerce Fashion</h2>
+                <p class="project-description">
+                    Trang thương mại điện tử thời trang với product showcase, 
+                    shopping cart và countdown timer.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">E-commerce</span>
+                    <span class="tech-tag">Luxury Design</span>
+                </div>
+                <div class="project-links">
+                    <a href="demos/ecommerce.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+            <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">
+                📝 Source code có sẵn trong file 
+                <code style="background: var(--secondary-bg); padding: 0.25rem 0.5rem; border-radius: 4px;">demos/ecommerce.html</code>
+            </p>
+        </div>
+
+        <div class="project-content" id="saas">
+            <div class="project-info">
+                <h2 class="project-title">CloudSync - SaaS Platform</h2>
+                <p class="project-description">
+                    Landing page cho nền tảng SaaS với dashboard preview, 
+                    pricing table và thiết kế B2B chuyên nghiệp.
+                </p>
+                <div class="project-tech">
+                    <span class="tech-tag">HTML5</span>
+                    <span class="tech-tag">CSS3</span>
+                    <span class="tech-tag">JavaScript</span>
+                    <span class="tech-tag">SaaS</span>
+                    <span class="tech-tag">B2B Design</span>
+                </div>
+                <div class="project-links">
+                    <a href="demos/saas-platform.html" class="btn btn-primary">
+                        <i class="fas fa-external-link-alt"></i>
+                        Live Demo
+                    </a>
+                </div>
+            </div>
+            <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">
+                📝 Source code có sẵn trong file 
+                <code style="background: var(--secondary-bg); padding: 0.25rem 0.5rem; border-radius: 4px;">demos/saas-platform.html</code>
+            </p>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script>
+        // Tab switching functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const projectContents = document.querySelectorAll('.project-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const projectId = button.getAttribute('data-project');
+                
+                // Remove active class from all tabs and contents
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                projectContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                button.classList.add('active');
+                document.getElementById(projectId).classList.add('active');
+            });
+        });
+
+        // File explorer functionality (for portfolio project)
+        const fileItems = document.querySelectorAll('.file-item');
+        const codeDisplay = document.getElementById('code-display');
+        const currentFilename = document.getElementById('current-filename');
+
+        const codeFiles = {
+            'index-html': {
+                name: 'index.html',
+                language: 'html',
+                content: `<!-- Portfolio HTML Structure -->
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Anh Tu - Front-end Developer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">Le Anh Tu</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Le Anh Tu</h1>
+                <h2 class="hero-subtitle">
+                    <span id="typing-text"></span>
+                    <span class="cursor">|</span>
+                </h2>
+                <p class="hero-description">
+                    Chào mừng đến với portfolio của tôi. Tôi là một lập trình viên 
+                    mới ra trường với đam mê xây dựng những giao diện web đẹp mắt.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Xem dự án</a>
+                    <a href="cv-viewer.html" class="btn btn-secondary">Xem CV</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Kỹ năng</h2>
+            <div class="skills-grid">
+                <div class="skill-item" data-skill="HTML5">
+                    <i class="fab fa-html5"></i>
+                    <span class="skill-name">HTML5</span>
+                </div>
+                <div class="skill-item" data-skill="CSS3">
+                    <i class="fab fa-css3-alt"></i>
+                    <span class="skill-name">CSS3</span>
+                </div>
+                <div class="skill-item" data-skill="JavaScript">
+                    <i class="fab fa-js-square"></i>
+                    <span class="skill-name">JavaScript</span>
+                </div>
+                <!-- More skills... -->
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>`
+            },
+            'styles-css': {
+                name: 'styles.css',
+                language: 'css',
+                content: `/* Portfolio CSS Styles */
+:root {
+    --primary-bg: #1a1a1a;
+    --secondary-bg: #2a2a2a;
+    --text-primary: #f0f0f0;
+    --text-secondary: #b0b0b0;
+    --accent-color: #007bff;
+    --accent-hover: #0056b3;
+    --border-color: #333;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Navigation Styles */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(10px);
+    z-index: 1000;
+    padding: 1rem 0;
+    transition: var(--transition);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo a {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    text-decoration: none;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: fadeInUp 1s ease;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .nav-menu {
+        display: none;
+    }
+}`
+            },
+            'script-js': {
+                name: 'script.js',
+                language: 'javascript',
+                content: `// Portfolio JavaScript Functionality
+
+// Typing Effect
+const typingText = document.getElementById('typing-text');
+const texts = [
+    'Front-end Developer',
+    'Landing Page Specialist',
+    'UI/UX Enthusiast'
+];
+
+let textIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typingSpeed = 100;
+
+function typeEffect() {
+    const currentText = texts[textIndex];
+    
+    if (isDeleting) {
+        typingText.textContent = currentText.substring(0, charIndex - 1);
+        charIndex--;
+        typingSpeed = 50;
+    } else {
+        typingText.textContent = currentText.substring(0, charIndex + 1);
+        charIndex++;
+        typingSpeed = 100;
+    }
+    
+    if (!isDeleting && charIndex === currentText.length) {
+        typingSpeed = 2000;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % texts.length;
+        typingSpeed = 500;
+    }
+    
+    setTimeout(typeEffect, typingSpeed);
+}
+
+// Start typing effect
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(typeEffect, 1000);
+});
+
+// Smooth scrolling
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const offsetTop = target.offsetTop - 80;
+            window.scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
+            });
+        }
+    });
+});
+
+// Navbar background on scroll
+window.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 100) {
+        navbar.style.background = 'rgba(26, 26, 26, 0.98)';
+    } else {
+        navbar.style.background = 'rgba(26, 26, 26, 0.95)';
+    }
+});
+
+// Intersection Observer for animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+        }
+    });
+}, observerOptions);
+
+// Contact form handling
+const contactForm = document.getElementById('contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const message = formData.get('message');
+        
+        if (!name || !email || !message) {
+            alert('Vui lòng điền đầy đủ thông tin!');
+            return;
+        }
+        
+        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
+        if (!emailRegex.test(email)) {
+            alert('Vui lòng nhập email hợp lệ!');
+            return;
+        }
+        
+        alert('Cảm ơn bạn đã liên hệ! Tôi sẽ phản hồi sớm nhất có thể.');
+        this.reset();
+    });
+}`
+            },
+            'readme-md': {
+                name: 'README.md',
+                language: 'markdown',
+                content: `# Le Anh Tu - Portfolio Website
+
+A modern, minimalist portfolio website for a front-end developer, built with HTML, CSS, and JavaScript.
+
+## 🌟 Features
+
+- **Modern Design**: Clean, minimalist dark theme with professional aesthetics
+- **Responsive Layout**: Fully responsive design that works on desktop, tablet, and mobile
+- **Interactive Elements**: 
+  - Typing effect animation for role titles
+  - Smooth scroll animations
+  - Hover effects on cards and buttons
+  - 3D tilt effect on project cards
+- **Single Page Application**: Smooth navigation between sections
+- **Contact Form**: Functional contact form with validation
+- **Mobile Navigation**: Hamburger menu for mobile devices
+
+## 🎨 Design Specifications
+
+- **Color Scheme**: 
+  - Primary Background: \`#1a1a1a\`
+  - Secondary Background: \`#2a2a2a\`
+  - Text Primary: \`#f0f0f0\`
+  - Text Secondary: \`#b0b0b0\`
+  - Accent Color: \`#007bff\`
+- **Typography**: Inter font family from Google Fonts
+- **Layout**: CSS Grid and Flexbox for responsive design
+
+## 🚀 Technologies Used
+
+- HTML5
+- CSS3 (Grid, Flexbox, Animations)
+- Vanilla JavaScript
+- Font Awesome Icons
+- Google Fonts (Inter)
+
+## 📂 Project Structure
+
+\`\`\`
+portfolio/
+├── index.html          # Main HTML file
+├── styles.css          # CSS styles
+├── script.js           # JavaScript functionality
+├── assets/             # Assets folder
+│   ├── cv.pdf         # CV file
+│   ├── health-ai-admin.jpg  # Project image 1
+│   └── landing-pages.jpg    # Project image 2
+└── README.md          # Project documentation
+\`\`\`
+
+## 🛠️ Setup and Usage
+
+1. Clone or download the project files
+2. Open \`index.html\` in a web browser
+3. The website is ready to use!
+
+## 👤 Author
+
+**Le Anh Tu**
+- Email: leanhtu16032003@gmail.com
+- LinkedIn: [linkedin.com/in/leanhttu](https://linkedin.com/in/leanhttu)
+- GitHub: [github.com/leanhtu05](https://github.com/leanhtu05)
+
+---
+
+*Designed and coded with ❤️ by Le Anh Tu*`
+            }
+        };
+
+        fileItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const fileKey = item.getAttribute('data-file');
+                const file = codeFiles[fileKey];
+                
+                if (file) {
+                    // Remove active class from all file items
+                    fileItems.forEach(fi => fi.classList.remove('active'));
+                    item.classList.add('active');
+                    
+                    // Update filename and code content
+                    currentFilename.textContent = file.name;
+                    codeDisplay.innerHTML = file.content;
+                    codeDisplay.className = \`language-\${file.language}\`;
+                    
+                    // Re-highlight syntax
+                    Prism.highlightElement(codeDisplay);
+                }
+            });
+        });
+
+        // Copy code functionality
+        function copyCode() {
+            const code = codeDisplay.textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const copyBtn = document.querySelector('.copy-button');
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyBtn.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                    copyBtn.style.background = 'var(--accent-color)';
+                }, 2000);
+            }).catch(() => {
+                alert('Không thể copy code. Vui lòng copy thủ công.');
+            });
+        }
+
+        // Initialize syntax highlighting
+        document.addEventListener('DOMContentLoaded', () => {
+            Prism.highlightAll();
+        });
+    </script>
+</body>
+</html>
