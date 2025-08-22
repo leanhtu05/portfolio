@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code - Portfolio Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2a2a2a;
+            --code-bg: #1e1e1e;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --border-color: #333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--secondary-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 20px;
+        }
+
+        .intro-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .intro-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .intro-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--secondary-bg);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+        }
+
+        .project-header {
+            padding: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .project-files {
+            padding: 1.5rem 2rem;
+            background: var(--code-bg);
+        }
+
+        .files-title {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .file-list {
+            list-style: none;
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .file-icon {
+            width: 16px;
+            text-align: center;
+        }
+
+        .github-section {
+            background: var(--secondary-bg);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .github-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .github-description {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .github-links {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .intro-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .github-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-title">📂 Source Code</h1>
+            <div class="header-nav">
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    Về Portfolio
+                </a>
+                <a href="https://github.com/leanhtu05" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i>
+                    GitHub Profile
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="intro-section">
+            <h1 class="intro-title">Portfolio Source Code</h1>
+            <p class="intro-description">
+                Khám phá source code của tất cả các demo projects trong portfolio. 
+                Mỗi project được xây dựng với HTML5, CSS3 và JavaScript vanilla.
+            </p>
+        </div>
+
+        <!-- Project Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">4</div>
+                <div class="stat-label">Demo Projects</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Files</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2000+</div>
+                <div class="stat-label">Lines of Code</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Technologies</div>
+            </div>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="projects-grid">
+            <!-- Portfolio Main -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">Portfolio Website</h2>
+                    <p class="project-description">
+                        Website portfolio cá nhân với thiết kế modern, dark theme và các demo projects tương tác. 
+                        Được xây dựng từ đầu với HTML5, CSS3 và JavaScript vanilla.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Responsive</span>
+                        <span class="tech-tag">Dark Theme</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="index.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="project-files">
+                    <h4 class="files-title">📁 Main Files</h4>
+                    <ul class="file-list">
+                        <li class="file-item">
+                            <i class="fab fa-html5 file-icon" style="color: #e34c26;"></i>
+                            <span>index.html</span>
+                        </li>
+                        <li class="file-item">
+                            <i class="fab fa-css3-alt file-icon" style="color: #1572b6;"></i>
+                            <span>styles.css</span>
+                        </li>
+                        <li class="file-item">
+                            <i class="fab fa-js-square file-icon" style="color: #f7df1e;"></i>
+                            <span>script.js</span>
+                        </li>
+                        <li class="file-item">
+                            <i class="fab fa-markdown file-icon" style="color: #083fa1;"></i>
+                            <span>README.md</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Health AI Admin -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">Health AI - Admin Dashboard</h2>
+                    <p class="project-description">
+                        Trang quản trị cho ứng dụng AI chẩn đoán sức khỏe với data visualization, 
+                        user management và real-time analytics.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Chart.js</span>
+                        <span class="tech-tag">Dark Theme</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="demos/health-ai-admin.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="project-files">
+                    <h4 class="files-title">📁 Source Files</h4>
+                    <ul class="file-list">
+                        <li class="file-item">
+                            <i class="fas fa-file-code file-icon" style="color: #007bff;"></i>
+                            <span>demos/health-ai-admin.html</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tech Startup -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">TechFlow - Tech Startup</h2>
+                    <p class="project-description">
+                        Landing page hiện đại cho công ty công nghệ với thiết kế gradient, 
+                        animations và tối ưu chuyển đổi.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Animations</span>
+                        <span class="tech-tag">Responsive</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="demos/tech-startup.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="project-files">
+                    <h4 class="files-title">📁 Source Files</h4>
+                    <ul class="file-list">
+                        <li class="file-item">
+                            <i class="fas fa-file-code file-icon" style="color: #6366f1;"></i>
+                            <span>demos/tech-startup.html</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- E-commerce -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">StyleHub - E-commerce</h2>
+                    <p class="project-description">
+                        Trang thương mại điện tử thời trang với product showcase, 
+                        shopping cart và countdown timer.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">E-commerce</span>
+                        <span class="tech-tag">Luxury Design</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="demos/ecommerce.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="project-files">
+                    <h4 class="files-title">📁 Source Files</h4>
+                    <ul class="file-list">
+                        <li class="file-item">
+                            <i class="fas fa-file-code file-icon" style="color: #d4af37;"></i>
+                            <span>demos/ecommerce.html</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- SaaS Platform -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">CloudSync - SaaS Platform</h2>
+                    <p class="project-description">
+                        Landing page cho nền tảng SaaS với dashboard preview, 
+                        pricing table và thiết kế B2B chuyên nghiệp.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">SaaS</span>
+                        <span class="tech-tag">B2B Design</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="demos/saas-platform.html" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Live Demo
+                        </a>
+                    </div>
+                </div>
+                <div class="project-files">
+                    <h4 class="files-title">📁 Source Files</h4>
+                    <ul class="file-list">
+                        <li class="file-item">
+                            <i class="fas fa-file-code file-icon" style="color: #8b5cf6;"></i>
+                            <span>demos/saas-platform.html</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Additional Tools -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h2 class="project-title">Additional Tools</h2>
+                    <p class="project-description">
+                        Các công cụ bổ sung như CV viewer, QR code generator và 
+                        source code documentation.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Tools</span>
+                        <span class="tech-tag">Utilities</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="cv-viewer.html" class="btn btn-primary">
+                            <i class="fas fa-file-pdf"></i>
+                            CV Viewer
+                        </a>
+                        <a href="simple-qr.html" class="btn btn-secondary">
+                            <i class="fas fa-qrcode"></i>
+                            QR Generator
+                        </a>
+                    </div>
+                </div>
+                <div class="project-files">
+                    <h4 class="files-title">📁 Tool Files</h4>
+                    <ul class="file-list">
+                        <li class="file-item">
+                            <i class="fas fa-file-code file-icon" style="color: #28a745;"></i>
+                            <span>cv-viewer.html</span>
+                        </li>
+                        <li class="file-item">
+                            <i class="fas fa-file-code file-icon" style="color: #ffc107;"></i>
+                            <span>simple-qr.html</span>
+                        </li>
+                        <li class="file-item">
+                            <i class="fas fa-file-code file-icon" style="color: #dc3545;"></i>
+                            <span>source-viewer.html</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- GitHub Section -->
+        <div class="github-section">
+            <h2 class="github-title">🚀 Xem Full Source Code trên GitHub</h2>
+            <p class="github-description">
+                Tất cả source code của portfolio này đều có sẵn trên GitHub repository. 
+                Bạn có thể clone, fork hoặc download để tham khảo và sử dụng.
+            </p>
+            <div class="github-links">
+                <a href="https://github.com/leanhtu05/portfolio" target="_blank" class="btn btn-primary">
+                    <i class="fab fa-github"></i>
+                    View on GitHub
+                </a>
+                <a href="https://github.com/leanhtu05/portfolio/archive/main.zip" class="btn btn-secondary">
+                    <i class="fas fa-download"></i>
+                    Download ZIP
+                </a>
+                <a href="https://github.com/leanhtu05" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-user"></i>
+                    GitHub Profile
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

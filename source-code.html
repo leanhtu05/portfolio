@@ -804,14 +804,18 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
-    background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+    background: linear-gradient(135deg,
+        var(--primary-bg) 0%,
+        var(--secondary-bg) 100%);
 }
 
 .hero-title {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+    background: linear-gradient(135deg,
+        var(--text-primary),
+        var(--accent-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -831,8 +835,12 @@ body {
 }
 
 @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+    0%, 50% {
+        opacity: 1;
+    }
+    51%, 100% {
+        opacity: 0;
+    }
 }
 
 /* Responsive Design */
@@ -840,7 +848,7 @@ body {
     .hero-title {
         font-size: 2.5rem;
     }
-    
+
     .nav-menu {
         display: none;
     }
@@ -950,8 +958,8 @@ if (contactForm) {
             return;
         }
         
-        const emailRegex = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/;
-        if (!emailRegex.test(email)) {
+        // Email validation
+        if (!email.includes('@') || !email.includes('.')) {
             alert('Vui lòng nhập email hợp lệ!');
             return;
         }
