@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - Portfolio Le Anh Tu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #2a2a2a;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #f0f0f0, #007bff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .url-input {
+            width: 100%;
+            padding: 1rem;
+            background: #1a1a1a;
+            border: 2px solid #333;
+            border-radius: 10px;
+            color: #f0f0f0;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .url-input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+
+        .generate-btn {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 123, 255, 0.3);
+        }
+
+        .qr-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            display: none;
+        }
+
+        .qr-container.show {
+            display: block;
+        }
+
+        .qr-code {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .download-btn {
+            background: #28a745;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .info-section {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border: 1px solid #333;
+        }
+
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+
+        .info-list {
+            list-style: none;
+            text-align: left;
+        }
+
+        .info-list li {
+            padding: 0.5rem 0;
+            color: #b0b0b0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .info-list li strong {
+            color: #f0f0f0;
+            min-width: 80px;
+        }
+
+        .copy-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        .copy-btn:hover {
+            background: #0056b3;
+        }
+
+        .suggested-urls {
+            background: #333;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+
+        .url-option {
+            background: #1a1a1a;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #444;
+        }
+
+        .url-option:hover {
+            border-color: #007bff;
+            background: #2a2a2a;
+        }
+
+        .url-option-title {
+            font-weight: 600;
+            color: #f0f0f0;
+            margin-bottom: 0.25rem;
+        }
+
+        .url-option-url {
+            font-size: 0.9rem;
+            color: #007bff;
+            font-family: monospace;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+
+            .info-list li {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">QR Code Generator</h1>
+        <p class="subtitle">Tạo QR code cho Portfolio Website của Le Anh Tu</p>
+
+        <input type="url" class="url-input" id="urlInput" placeholder="Nhập URL website portfolio của bạn...">
+        <br>
+        <button class="generate-btn" onclick="generateQR()">Tạo QR Code</button>
+
+        <div class="qr-container" id="qrContainer">
+            <img class="qr-code" id="qrCode" alt="QR Code">
+            <br>
+            <button class="download-btn" onclick="downloadQR()">Tải xuống QR Code</button>
+        </div>
+
+        <div class="suggested-urls">
+            <h3 style="color: #f0f0f0; margin-bottom: 1rem;">🌐 Gợi ý URL Deploy:</h3>
+            
+            <div class="url-option" onclick="useUrl('https://leanhtu05.github.io/portfolio/')">
+                <div class="url-option-title">GitHub Pages (Khuyến nghị)</div>
+                <div class="url-option-url">https://leanhtu05.github.io/portfolio/</div>
+            </div>
+
+            <div class="url-option" onclick="useUrl('https://leanhttu-portfolio.netlify.app')">
+                <div class="url-option-title">Netlify</div>
+                <div class="url-option-url">https://leanhttu-portfolio.netlify.app</div>
+            </div>
+
+            <div class="url-option" onclick="useUrl('https://portfolio-leanhtu05.vercel.app')">
+                <div class="url-option-title">Vercel</div>
+                <div class="url-option-url">https://portfolio-leanhtu05.vercel.app</div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h3 class="info-title">📋 Thông tin cho CV:</h3>
+            <ul class="info-list">
+                <li>
+                    <strong>Email:</strong> 
+                    <span>leanhtu16032003@gmail.com</span>
+                    <button class="copy-btn" onclick="copyToClipboard('leanhtu16032003@gmail.com')">Copy</button>
+                </li>
+                <li>
+                    <strong>GitHub:</strong> 
+                    <span>https://github.com/leanhtu05</span>
+                    <button class="copy-btn" onclick="copyToClipboard('https://github.com/leanhtu05')">Copy</button>
+                </li>
+                <li>
+                    <strong>Portfolio:</strong> 
+                    <span id="portfolioUrl">Chưa có URL</span>
+                    <button class="copy-btn" id="copyPortfolioBtn" onclick="copyPortfolioUrl()" style="display: none;">Copy</button>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let currentUrl = '';
+
+        function useUrl(url) {
+            document.getElementById('urlInput').value = url;
+            currentUrl = url;
+            document.getElementById('portfolioUrl').textContent = url;
+            document.getElementById('copyPortfolioBtn').style.display = 'inline-block';
+        }
+
+        function generateQR() {
+            const url = document.getElementById('urlInput').value;
+            if (!url) {
+                alert('Vui lòng nhập URL!');
+                return;
+            }
+
+            currentUrl = url;
+            document.getElementById('portfolioUrl').textContent = url;
+            document.getElementById('copyPortfolioBtn').style.display = 'inline-block';
+
+            // Sử dụng Google Charts API để tạo QR code
+            const qrUrl = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(url)}&choe=UTF-8`;
+            
+            const qrCode = document.getElementById('qrCode');
+            qrCode.src = qrUrl;
+            
+            document.getElementById('qrContainer').classList.add('show');
+        }
+
+        function downloadQR() {
+            if (!currentUrl) {
+                alert('Vui lòng tạo QR code trước!');
+                return;
+            }
+
+            const qrUrl = `https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=${encodeURIComponent(currentUrl)}&choe=UTF-8`;
+            
+            // Tạo link download
+            const link = document.createElement('a');
+            link.href = qrUrl;
+            link.download = 'portfolio-qr-code.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                // Hiển thị thông báo đã copy
+                const originalText = event.target.textContent;
+                event.target.textContent = 'Copied!';
+                event.target.style.background = '#28a745';
+                
+                setTimeout(() => {
+                    event.target.textContent = originalText;
+                    event.target.style.background = '#007bff';
+                }, 1000);
+            }).catch(() => {
+                // Fallback cho trình duyệt cũ
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                alert('Đã copy: ' + text);
+            });
+        }
+
+        function copyPortfolioUrl() {
+            if (currentUrl) {
+                copyToClipboard(currentUrl);
+            }
+        }
+
+        // Tự động tạo QR code cho GitHub Pages URL
+        window.onload = function() {
+            useUrl('https://leanhtu05.github.io/portfolio/');
+            generateQR();
+        };
+    </script>
+</body>
+</html>

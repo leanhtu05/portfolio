@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Samples - Le Anh Tu Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2a2a2a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --border-color: #333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .back-to-portfolio {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--accent-color);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        .back-to-portfolio:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        .header {
+            padding: 100px 0 50px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--secondary-bg) 100%);
+        }
+
+        .header-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 3rem;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--secondary-bg);
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            border: 1px solid var(--border-color);
+        }
+
+        .tech-item i {
+            color: var(--accent-color);
+            font-size: 1.2rem;
+        }
+
+        /* Samples Grid */
+        .samples {
+            padding: 80px 0;
+        }
+
+        .samples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .sample-card {
+            background: var(--secondary-bg);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .sample-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .sample-preview {
+            height: 300px;
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sample-preview.tech {
+            background: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+        }
+
+        .sample-preview.ecommerce {
+            background: linear-gradient(135deg, #d4af37 0%, #b8941f 100%);
+        }
+
+        .sample-preview.saas {
+            background: linear-gradient(135deg, #8b5cf6 0%, #06b6d4 100%);
+        }
+
+        .preview-icon {
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .sample-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .sample-card:hover .sample-overlay {
+            opacity: 1;
+        }
+
+        .sample-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .sample-link {
+            padding: 12px 24px;
+            background: var(--accent-color);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .sample-link:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .sample-link.secondary {
+            background: transparent;
+            border: 2px solid white;
+        }
+
+        .sample-link.secondary:hover {
+            background: white;
+            color: var(--primary-bg);
+        }
+
+        .sample-content {
+            padding: 2rem;
+        }
+
+        .sample-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .sample-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .sample-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            padding: 0.25rem 0.75rem;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .sample-features {
+            list-style: none;
+        }
+
+        .sample-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .sample-features li i {
+            color: var(--accent-color);
+            width: 16px;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--secondary-bg);
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-text {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .footer-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--accent-color);
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .footer-button:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header-title {
+                font-size: 2rem;
+            }
+
+            .samples-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .sample-links {
+                flex-direction: column;
+            }
+
+            .tech-stack {
+                gap: 1rem;
+            }
+
+            .tech-item {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="../index.html" class="back-to-portfolio">
+        <i class="fas fa-arrow-left"></i> Về Portfolio
+    </a>
+
+    <!-- Header -->
+    <section class="header">
+        <div class="container">
+            <h1 class="header-title">Landing Page Samples</h1>
+            <p class="header-subtitle">
+                Bộ sưu tập các landing page responsive được thiết kế và phát triển từ đầu, 
+                thể hiện kỹ năng front-end và tư duy thiết kế hướng chuyển đổi.
+            </p>
+            <div class="tech-stack">
+                <div class="tech-item">
+                    <i class="fab fa-html5"></i>
+                    <span>HTML5</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-css3-alt"></i>
+                    <span>CSS3</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fab fa-js-square"></i>
+                    <span>JavaScript</span>
+                </div>
+                <div class="tech-item">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span>Responsive</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Samples -->
+    <section class="samples">
+        <div class="container">
+            <div class="samples-grid">
+                <!-- Tech Startup Sample -->
+                <div class="sample-card animate-on-scroll">
+                    <div class="sample-preview tech">
+                        <div class="preview-icon">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="sample-overlay">
+                            <div class="sample-links">
+                                <a href="tech-startup.html" class="sample-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Xem Demo
+                                </a>
+                                <a href="#" class="sample-link secondary">
+                                    <i class="fab fa-github"></i>
+                                    Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sample-content">
+                        <h3 class="sample-title">TechFlow - Tech Startup</h3>
+                        <p class="sample-description">
+                            Landing page hiện đại cho công ty công nghệ với thiết kế gradient đẹp mắt, 
+                            animations mượt mà và tối ưu hóa chuyển đổi.
+                        </p>
+                        <div class="sample-tags">
+                            <span class="tag">Modern Design</span>
+                            <span class="tag">Gradient</span>
+                            <span class="tag">Animations</span>
+                            <span class="tag">CTA Optimization</span>
+                        </div>
+                        <ul class="sample-features">
+                            <li><i class="fas fa-check"></i> Hero section với typing effect</li>
+                            <li><i class="fas fa-check"></i> Features grid với hover effects</li>
+                            <li><i class="fas fa-check"></i> Stats counter animation</li>
+                            <li><i class="fas fa-check"></i> Smooth scroll navigation</li>
+                            <li><i class="fas fa-check"></i> Mobile responsive design</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- E-commerce Sample -->
+                <div class="sample-card animate-on-scroll">
+                    <div class="sample-preview ecommerce">
+                        <div class="preview-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="sample-overlay">
+                            <div class="sample-links">
+                                <a href="ecommerce.html" class="sample-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Xem Demo
+                                </a>
+                                <a href="#" class="sample-link secondary">
+                                    <i class="fab fa-github"></i>
+                                    Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sample-content">
+                        <h3 class="sample-title">StyleHub - Fashion E-commerce</h3>
+                        <p class="sample-description">
+                            Trang thương mại điện tử thời trang cao cấp với thiết kế elegant, 
+                            product showcase và tính năng mua sắm tương tác.
+                        </p>
+                        <div class="sample-tags">
+                            <span class="tag">E-commerce</span>
+                            <span class="tag">Luxury Design</span>
+                            <span class="tag">Product Cards</span>
+                            <span class="tag">Shopping Cart</span>
+                        </div>
+                        <ul class="sample-features">
+                            <li><i class="fas fa-check"></i> Product grid với hover effects</li>
+                            <li><i class="fas fa-check"></i> Shopping cart functionality</li>
+                            <li><i class="fas fa-check"></i> Countdown timer cho flash sale</li>
+                            <li><i class="fas fa-check"></i> Product rating system</li>
+                            <li><i class="fas fa-check"></i> Wishlist functionality</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- SaaS Platform Sample -->
+                <div class="sample-card animate-on-scroll">
+                    <div class="sample-preview saas">
+                        <div class="preview-icon">
+                            <i class="fas fa-cloud"></i>
+                        </div>
+                        <div class="sample-overlay">
+                            <div class="sample-links">
+                                <a href="saas-platform.html" class="sample-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Xem Demo
+                                </a>
+                                <a href="#" class="sample-link secondary">
+                                    <i class="fab fa-github"></i>
+                                    Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sample-content">
+                        <h3 class="sample-title">CloudSync - SaaS Platform</h3>
+                        <p class="sample-description">
+                            Landing page cho nền tảng SaaS với dashboard preview, 
+                            pricing table và thiết kế chuyên nghiệp cho doanh nghiệp.
+                        </p>
+                        <div class="sample-tags">
+                            <span class="tag">SaaS</span>
+                            <span class="tag">Dashboard</span>
+                            <span class="tag">Pricing Table</span>
+                            <span class="tag">B2B Design</span>
+                        </div>
+                        <ul class="sample-features">
+                            <li><i class="fas fa-check"></i> Interactive dashboard preview</li>
+                            <li><i class="fas fa-check"></i> Animated statistics</li>
+                            <li><i class="fas fa-check"></i> Pricing comparison table</li>
+                            <li><i class="fas fa-check"></i> Feature showcase grid</li>
+                            <li><i class="fas fa-check"></i> Professional B2B design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <h3 class="footer-title">Ấn tượng với các demo?</h3>
+                <p class="footer-text">
+                    Những landing page này thể hiện kỹ năng front-end development và khả năng 
+                    thiết kế UI/UX của tôi. Hãy liên hệ để thảo luận về dự án của bạn!
+                </p>
+                <a href="../index.html#contact" class="footer-button">
+                    <i class="fas fa-envelope"></i>
+                    Liên hệ ngay
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

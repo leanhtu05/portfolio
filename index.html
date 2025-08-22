@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Anh Tu - Front-end Developer Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">Le Anh Tu</a>
+            </div>
+            <div class="nav-menu" id="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="nav-toggle" id="nav-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">Le Anh Tu</h1>
+                <h2 class="hero-subtitle">
+                    <span id="typing-text"></span>
+                    <span class="cursor">|</span>
+                </h2>
+                <p class="hero-description">
+                    Chào mừng đến với portfolio của tôi. Tôi là một lập trình viên mới ra trường với đam mê xây dựng những giao diện web đẹp mắt, tối ưu và mang lại trải nghiệm tuyệt vời cho người dùng.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">Xem dự án</a>
+                    <a href="assets/cv.pdf" target="_blank" class="btn btn-secondary">Tải CV</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Giới thiệu</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        Với nền tảng từ đồ án phát triển ứng dụng di động, tôi đã có kinh nghiệm thực tế trong việc thiết kế giao diện và trải nghiệm người dùng. Mục tiêu của tôi là áp dụng những kiến thức này để tạo ra các Landing Page không chỉ đẹp về mặt thẩm mỹ mà còn hiệu quả về mặt chuyển đổi.
+                    </p>
+                </div>
+                <div class="about-interests">
+                    <div class="interest-item">
+                        <i class="fas fa-code"></i>
+                        <span>Coding</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-futbol"></i>
+                        <span>Football</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-book"></i>
+                        <span>Reading</span>
+                    </div>
+                    <div class="interest-item">
+                        <i class="fas fa-music"></i>
+                        <span>Music</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Kỹ năng</h2>
+            <div class="skills-grid">
+                <div class="skill-item" data-skill="HTML5">
+                    <i class="fab fa-html5"></i>
+                    <span class="skill-name">HTML5</span>
+                </div>
+                <div class="skill-item" data-skill="CSS3">
+                    <i class="fab fa-css3-alt"></i>
+                    <span class="skill-name">CSS3</span>
+                </div>
+                <div class="skill-item" data-skill="JavaScript">
+                    <i class="fab fa-js-square"></i>
+                    <span class="skill-name">JavaScript</span>
+                </div>
+                <div class="skill-item" data-skill="Flutter">
+                    <i class="fas fa-mobile-alt"></i>
+                    <span class="skill-name">Flutter</span>
+                </div>
+                <div class="skill-item" data-skill="Firebase">
+                    <i class="fas fa-fire"></i>
+                    <span class="skill-name">Firebase</span>
+                </div>
+                <div class="skill-item" data-skill="Python">
+                    <i class="fab fa-python"></i>
+                    <span class="skill-name">Python</span>
+                </div>
+                <div class="skill-item" data-skill="Git">
+                    <i class="fab fa-git-alt"></i>
+                    <span class="skill-name">Git</span>
+                </div>
+                <div class="skill-item" data-skill="Figma">
+                    <i class="fab fa-figma"></i>
+                    <span class="skill-name">Figma</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Dự án</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/health-ai-admin.jpg" alt="Health AI Admin Panel">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="demos/health-ai-admin.html" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/leanhtu05/health-ai-admin" class="project-link" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                    Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Health AI - Admin Panel</h3>
+                        <p class="project-description">
+                            Trang quản trị được xây dựng bằng Flutter Web, dùng để quản lý dữ liệu người dùng và hệ thống. Dự án này thể hiện kinh nghiệm của tôi trong việc xây dựng giao diện web phức tạp và xử lý dữ liệu.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">#Flutter</span>
+                            <span class="tag">#Web</span>
+                            <span class="tag">#UI/UX</span>
+                            <span class="tag">#Firebase</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="assets/landing-pages.jpg" alt="Landing Page Samples">
+                        <div class="project-overlay">
+                            <div class="project-links">
+                                <a href="demos/landing-samples.html" class="project-link">
+                                    <i class="fas fa-external-link-alt"></i>
+                                    Live Demo
+                                </a>
+                                <a href="https://github.com/leanhtu05/landing-page-samples" class="project-link" target="_blank">
+                                    <i class="fab fa-github"></i>
+                                    Source Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <h3 class="project-title">Landing Page Samples</h3>
+                        <p class="project-description">
+                            Một bộ sưu tập các landing page responsive được code từ đầu bằng HTML, CSS và JavaScript để chứng minh kỹ năng xây dựng web nền tảng và tư duy thiết kế hướng chuyển đổi.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">#HTML</span>
+                            <span class="tag">#CSS</span>
+                            <span class="tag">#JavaScript</span>
+                            <span class="tag">#Responsive</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Get In Touch!</h2>
+            <div class="contact-content">
+                <form class="contact-form" id="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" name="name" placeholder="Tên của bạn" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" name="message" placeholder="Nội dung tin nhắn" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Gửi tin nhắn</button>
+                </form>
+                
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/leanhttu" target="_blank" class="social-link">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/leanhtu05" target="_blank" class="social-link">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:leanhtu16032003@gmail.com" class="social-link">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Le Anh Tu. Designed and Coded with ❤️.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem; color: #666;">
+                <i class="fas fa-envelope"></i> leanhtu16032003@gmail.com |
+                <i class="fab fa-github"></i> github.com/leanhtu05
+            </p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
