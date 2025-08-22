@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code - Portfolio Le Anh Tu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+            color: #f0f0f0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: #2a2a2a;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+
+        .subtitle {
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+
+        .qr-display {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .qr-code {
+            max-width: 100%;
+            height: auto;
+            border: none;
+        }
+
+        .url-display {
+            background: #1a1a1a;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            font-family: monospace;
+            color: #007bff;
+            word-break: break-all;
+        }
+
+        .btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-success {
+            background: #28a745;
+        }
+
+        .btn-success:hover {
+            background: #218838;
+        }
+
+        .info-section {
+            background: #1a1a1a;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border: 1px solid #333;
+            text-align: left;
+        }
+
+        .info-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: #007bff;
+            text-align: center;
+        }
+
+        .info-item {
+            margin: 1rem 0;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .info-item:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #f0f0f0;
+            margin-bottom: 0.25rem;
+        }
+
+        .info-value {
+            color: #b0b0b0;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            margin-left: 0.5rem;
+        }
+
+        .instructions {
+            background: #333;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            text-align: left;
+        }
+
+        .instructions h4 {
+            color: #007bff;
+            margin-bottom: 1rem;
+        }
+
+        .instructions ol {
+            color: #b0b0b0;
+            padding-left: 1.5rem;
+        }
+
+        .instructions li {
+            margin: 0.5rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1.5rem;
+            }
+
+            .title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🎯 QR Code Portfolio</h1>
+        <p class="subtitle">QR Code cho Portfolio Website của Le Anh Tu</p>
+
+        <div class="qr-display">
+            <img class="qr-code" 
+                 src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://leanhtu05.github.io/portfolio/" 
+                 alt="Portfolio QR Code"
+                 onerror="this.src='https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=https://leanhtu05.github.io/portfolio/&choe=UTF-8'">
+        </div>
+
+        <div class="url-display">
+            https://leanhtu05.github.io/portfolio/
+        </div>
+
+        <a href="https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=https://leanhtu05.github.io/portfolio/" 
+           download="portfolio-qr-code.png" 
+           class="btn btn-success">
+            📥 Tải QR Code (500x500)
+        </a>
+
+        <a href="https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data=https://leanhtu05.github.io/portfolio/" 
+           download="portfolio-qr-code-hd.png" 
+           class="btn">
+            📥 Tải QR Code HD (1000x1000)
+        </a>
+
+        <div class="info-section">
+            <h3 class="info-title">📋 Thông tin cho CV</h3>
+            
+            <div class="info-item">
+                <div class="info-label">📧 Email:</div>
+                <div class="info-value">
+                    leanhtu16032003@gmail.com
+                    <button class="copy-btn" onclick="copyText('leanhtu16032003@gmail.com')">Copy</button>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">💻 GitHub:</div>
+                <div class="info-value">
+                    https://github.com/leanhtu05
+                    <button class="copy-btn" onclick="copyText('https://github.com/leanhtu05')">Copy</button>
+                </div>
+            </div>
+
+            <div class="info-item">
+                <div class="info-label">🌐 Portfolio:</div>
+                <div class="info-value">
+                    https://leanhtu05.github.io/portfolio/
+                    <button class="copy-btn" onclick="copyText('https://leanhtu05.github.io/portfolio/')">Copy</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h4>📖 Hướng dẫn sử dụng QR Code:</h4>
+            <ol>
+                <li>Click nút "Tải QR Code" để download file PNG</li>
+                <li>Mở file PNG và chèn vào CV của bạn</li>
+                <li>Đặt QR code ở góc trên phải hoặc cuối CV</li>
+                <li>Thêm text "Scan để xem Portfolio" bên cạnh QR code</li>
+                <li>Đảm bảo QR code có kích thước ít nhất 2cm x 2cm khi in</li>
+            </ol>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <a href="index.html" class="btn">🏠 Về Portfolio</a>
+            <a href="https://leanhtu05.github.io/portfolio/" target="_blank" class="btn">🌐 Xem Website</a>
+        </div>
+    </div>
+
+    <script>
+        function copyText(text) {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showCopySuccess(event.target);
+                }).catch(() => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showCopySuccess(event.target);
+            } catch (err) {
+                alert('Không thể copy. Vui lòng copy thủ công: ' + text);
+            }
+            document.body.removeChild(textArea);
+        }
+
+        function showCopySuccess(button) {
+            const originalText = button.textContent;
+            button.textContent = 'Copied!';
+            button.style.background = '#28a745';
+            
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.style.background = '#007bff';
+            }, 1500);
+        }
+
+        // Test QR code load
+        window.onload = function() {
+            const qrImg = document.querySelector('.qr-code');
+            qrImg.onload = function() {
+                console.log('QR Code loaded successfully!');
+            };
+            qrImg.onerror = function() {
+                console.log('Primary QR API failed, trying backup...');
+                this.src = 'https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=https://leanhtu05.github.io/portfolio/&choe=UTF-8';
+            };
+        };
+    </script>
+</body>
+</html>

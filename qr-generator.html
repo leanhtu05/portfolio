@@ -297,12 +297,29 @@
             document.getElementById('portfolioUrl').textContent = url;
             document.getElementById('copyPortfolioBtn').style.display = 'inline-block';
 
-            // Sử dụng Google Charts API để tạo QR code
-            const qrUrl = `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(url)}&choe=UTF-8`;
-            
+            // Thử nhiều API khác nhau
+            const apis = [
+                `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}`,
+                `https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=${encodeURIComponent(url)}&choe=UTF-8`,
+                `https://quickchart.io/qr?text=${encodeURIComponent(url)}&size=300`
+            ];
+
             const qrCode = document.getElementById('qrCode');
-            qrCode.src = qrUrl;
-            
+
+            // Thử API đầu tiên
+            qrCode.src = apis[0];
+            qrCode.onerror = function() {
+                // Nếu API đầu tiên lỗi, thử API thứ hai
+                qrCode.src = apis[1];
+                qrCode.onerror = function() {
+                    // Nếu API thứ hai lỗi, thử API thứ ba
+                    qrCode.src = apis[2];
+                    qrCode.onerror = function() {
+                        alert('Không thể tạo QR code. Vui lòng thử lại sau!');
+                    };
+                };
+            };
+
             document.getElementById('qrContainer').classList.add('show');
         }
 
@@ -312,15 +329,20 @@
                 return;
             }
 
-            const qrUrl = `https://chart.googleapis.com/chart?chs=500x500&cht=qr&chl=${encodeURIComponent(currentUrl)}&choe=UTF-8`;
-            
+            // Sử dụng API tốt nhất cho download
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&data=${encodeURIComponent(currentUrl)}`;
+
             // Tạo link download
             const link = document.createElement('a');
             link.href = qrUrl;
             link.download = 'portfolio-qr-code.png';
+            link.target = '_blank';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+
+            // Thông báo cho user
+            alert('QR Code đang được tải xuống! Nếu không tự động tải, hãy click chuột phải vào QR code và chọn "Save image as..."');
         }
 
         function copyToClipboard(text) {
