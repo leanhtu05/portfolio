@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Le Anh Tu | Front-end Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2a2a2a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --accent-color: #007bff;
+            --accent-hover: #0056b3;
+            --border-color: #333;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--secondary-bg);
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .cv-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .cv-viewer {
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow);
+        }
+
+        .cv-embed {
+            width: 100%;
+            height: 80vh;
+            border: none;
+            border-radius: 10px;
+            background: white;
+        }
+
+        .cv-fallback {
+            text-align: center;
+            padding: 3rem;
+            background: var(--primary-bg);
+            border-radius: 10px;
+            border: 2px dashed var(--border-color);
+        }
+
+        .cv-fallback h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .cv-fallback p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .cv-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-card {
+            background: var(--primary-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+        }
+
+        .info-card h4 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .info-list {
+            list-style: none;
+        }
+
+        .info-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .info-list li i {
+            color: var(--accent-color);
+            width: 20px;
+        }
+
+        .contact-info {
+            background: var(--primary-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--secondary-bg);
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .contact-details h5 {
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-details p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .contact-details a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .contact-details a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .header-actions {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .cv-viewer {
+                padding: 1rem;
+            }
+
+            .cv-embed {
+                height: 60vh;
+            }
+
+            .cv-info {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1 class="header-title">CV - Le Anh Tu</h1>
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
+                    Về Portfolio
+                </a>
+                <a href="assets/cv.pdf" download class="btn btn-primary">
+                    <i class="fas fa-download"></i>
+                    Tải CV
+                </a>
+                <a href="assets/cv.pdf" target="_blank" class="btn btn-secondary">
+                    <i class="fas fa-external-link-alt"></i>
+                    Mở PDF
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="cv-container">
+        <div class="cv-viewer">
+            <iframe 
+                src="assets/cv.pdf" 
+                class="cv-embed"
+                title="CV Le Anh Tu">
+            </iframe>
+            
+            <!-- Fallback nếu PDF không load được -->
+            <div class="cv-fallback" style="display: none;" id="cv-fallback">
+                <h3>📄 CV không thể hiển thị</h3>
+                <p>Trình duyệt của bạn không hỗ trợ xem PDF trực tiếp. Vui lòng tải xuống để xem.</p>
+                <a href="assets/cv.pdf" download class="btn btn-primary">
+                    <i class="fas fa-download"></i>
+                    Tải CV (PDF)
+                </a>
+            </div>
+        </div>
+
+        <div class="cv-info">
+            <div class="info-card">
+                <h4>🎯 Mục tiêu nghề nghiệp</h4>
+                <p>Trở thành Front-end Developer chuyên nghiệp, tập trung vào việc xây dựng các ứng dụng web hiện đại với trải nghiệm người dùng tối ưu.</p>
+            </div>
+
+            <div class="info-card">
+                <h4>💼 Kỹ năng chính</h4>
+                <ul class="info-list">
+                    <li><i class="fab fa-html5"></i> HTML5 & CSS3</li>
+                    <li><i class="fab fa-js-square"></i> JavaScript ES6+</li>
+                    <li><i class="fas fa-mobile-alt"></i> Responsive Design</li>
+                    <li><i class="fab fa-react"></i> Flutter Development</li>
+                    <li><i class="fas fa-database"></i> Firebase Integration</li>
+                    <li><i class="fab fa-git-alt"></i> Git & Version Control</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h4>🚀 Dự án nổi bật</h4>
+                <ul class="info-list">
+                    <li><i class="fas fa-chart-bar"></i> Health AI Admin Dashboard</li>
+                    <li><i class="fas fa-shopping-cart"></i> E-commerce Landing Pages</li>
+                    <li><i class="fas fa-cloud"></i> SaaS Platform Interface</li>
+                    <li><i class="fas fa-mobile-alt"></i> Flutter Mobile Apps</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h4>🎓 Học vấn & Chứng chỉ</h4>
+                <ul class="info-list">
+                    <li><i class="fas fa-graduation-cap"></i> Đại học Công nghệ Thông tin</li>
+                    <li><i class="fas fa-certificate"></i> Front-end Development</li>
+                    <li><i class="fas fa-certificate"></i> Responsive Web Design</li>
+                    <li><i class="fas fa-certificate"></i> JavaScript Algorithms</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <h4 style="text-align: center; margin-bottom: 2rem; color: var(--accent-color); font-size: 1.5rem;">
+                📞 Thông tin liên hệ
+            </h4>
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h5>Email</h5>
+                        <p><a href="mailto:leanhtu16032003@gmail.com">leanhtu16032003@gmail.com</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h5>GitHub</h5>
+                        <p><a href="https://github.com/leanhtu05" target="_blank">github.com/leanhtu05</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h5>Portfolio</h5>
+                        <p><a href="https://leanhtu05.github.io/portfolio/" target="_blank">leanhtu05.github.io/portfolio</a></p>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <div class="contact-icon">
+                        <i class="fab fa-linkedin"></i>
+                    </div>
+                    <div class="contact-details">
+                        <h5>LinkedIn</h5>
+                        <p><a href="https://linkedin.com/in/leanhttu" target="_blank">linkedin.com/in/leanhttu</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Kiểm tra xem PDF có load được không
+        const iframe = document.querySelector('.cv-embed');
+        const fallback = document.getElementById('cv-fallback');
+
+        iframe.onload = function() {
+            console.log('CV PDF loaded successfully');
+        };
+
+        iframe.onerror = function() {
+            console.log('CV PDF failed to load, showing fallback');
+            iframe.style.display = 'none';
+            fallback.style.display = 'block';
+        };
+
+        // Timeout fallback nếu PDF không load trong 5 giây
+        setTimeout(() => {
+            if (!iframe.contentDocument && !iframe.contentWindow) {
+                iframe.style.display = 'none';
+                fallback.style.display = 'block';
+            }
+        }, 5000);
+    </script>
+</body>
+</html>
